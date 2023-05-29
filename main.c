@@ -3,79 +3,93 @@
 
 typedef struct {
      int legajo;
-     char nombreYapellido [30];
+     char nombreYapellido[30];
      int edad;
      int anio;
 } stAlumno;
 
-void cargarAlFinalArchivo(FILE *archivo);
-void mostrarArchivo(FILE *archivo, stAlumno persona[], int validos);
-int cargarAlumnos(FILE *archivo, stAlumno persona[], int dim);
+void cargarAlFinalArchivo();
+void mostrarArchivo();
+int cantidadDeAlumnos();
 
 int main()
 {
    stAlumno persona[20];
-   int validos;
-   FILE *archivo;
+   int cantAlumnos;
 
-   validos = cargarAlumnos(archivo, persona, 20);
-    mostrarArchivo(archivo, persona, validos);
+    cargarAlFinalArchivo();
+    mostrarArchivo();
+
+    cantAlumnos = cantidadDeAlumnos();
+    printf("La cantidad de alumnos registrados es de: %d", cantAlumnos);
 }
 
-void cargarAlFinalArchivo(FILE *archivo){
+void cargarAlFinalArchivo(){
 
-        archivo = fopen("miArchivo.bin", "ab");
-
-}
-
-void mostrarArchivo(FILE *archivo, stAlumno persona[], int validos){
-
-    int i = 0;
-
+    FILE *archivo;
     archivo = fopen("miArchivo.bin", "ab");
+
+    if(archivo != NULL)
+    {
+
+        stAlumno persona;
+
+        printf("Ingresa el legajo del alumno: ");
+        scanf("%i", &persona.legajo);
+
+        printf("Ingresa el nombre del alumno: ");
+        fflush(stdin);
+        gets(&persona.nombreYapellido);
+
+        printf("Ingresa la edad del alumno: ");
+        scanf("%i", &persona.edad);
+
+        printf("Ingresa el anio del alumno: ");
+        scanf("%i", &persona.anio);
+
+        fwrite(&persona, sizeof(stAlumno),1, archivo);
+
+        fclose(archivo);
+    }
+}
+
+void mostrarArchivo(){
+
+    FILE *archivo;
+    archivo = fopen("miArchivo.bin", "rb");
+    stAlumno persona;
+
     if(archivo != NULL){
 
-       while(i < validos){
+       while(!feof(archivo)){
 
-        printf("Legajo del Alumno: %d\n", persona[i].legajo);
-        printf("Nombre del Alumno: %d\n", persona[i].nombreYapellido);
-        printf("Edad del Alumno: %d\n", persona[i].edad);
-        printf("Anio del Alumno: %d\n"), persona[i].anio;
+            fread(&persona, sizeof(stAlumno),1, archivo);
 
+            if(!feof(archivo)){
+                printf("LEGAJO: %d", persona.legajo);
+                printf("\nNOMBRE: %s", persona.nombreYapellido);
+                printf("\nEDAD: %d", persona.edad);
+                printf("\nANIO: %d", persona.anio);
+            }
        }
+       fclose(archivo);
     }
-
 }
 
-int cargarAlumnos(FILE *archivo, stAlumno persona[], int dim){
+int cantidadDeAlumnos()
+{
+    FILE *archivo;
+    archivo = fopen("miArchivo.bin", "rb");
+    int cant = 0;
+    if(archivo != NULL)
+    {
 
-    int i = 0;
+        fseek(archivo,0,SEEK_END); //VOY AL FINAL DEL ARCHIVO Y ME MUEVO 0 VECES
+        long int totalArchivo = ftell(archivo); // FTELL ME ENVIA LA CANT EN BITS DE LO QUE OCUPA MI ARCHIVO
+        cant = (int)totalArchivo/sizeof(stAlumno); // CANT DE BITS % PESO DE LA VARIABLE
 
-    archivo = fopen("miArchivo.bin", "ab");
-
-    if(archivo != NULL){
-
-        while(i < dim){
-
-            printf("Ingresa el legajo del alumno: ");
-            fflush(stdin);
-            scanf("%i", persona[i].legajo);
-
-             printf("Ingresa el nombre del alumno: ");
-            fflush(stdin);
-            scanf("%s", persona[i].nombreYapellido);
-
-             printf("Ingresa la edad del alumno: ");
-            fflush(stdin);
-            scanf("%i", persona[i].edad);
-
-             printf("Ingresa el año del alumno: ");
-            fflush(stdin);
-            scanf("%i", persona[i].anio);
-
-            i++;
-        }
+        fclose(archivo);
     }
 
-    return i;
+    return cant;
 }
