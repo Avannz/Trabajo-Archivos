@@ -1,30 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct {
-     int legajo;
-     char nombreYapellido[30];
-     int edad;
-     int anio;
+typedef struct
+{
+    int legajo;
+    char nombreYapellido[30];
+    int edad;
+    int anio;
 } stAlumno;
 
 void cargarAlFinalArchivo();
 void mostrarArchivo();
 int cantidadDeAlumnos();
+void cargarAlumnos5();
 
 int main()
 {
-   stAlumno persona[20];
-   int cantAlumnos;
+    stAlumno persona[20];
+    int cantAlumnos;
 
-    cargarAlFinalArchivo();
+    /*cargarAlFinalArchivo();
     mostrarArchivo();
 
     cantAlumnos = cantidadDeAlumnos();
-    printf("La cantidad de alumnos registrados es de: %d", cantAlumnos);
+    printf("\nLa cantidad de alumnos registrados es de: %d", cantAlumnos);*/
+
+    cargarAlumnos5();
+    mostrarArchivo();
 }
 
-void cargarAlFinalArchivo(){
+void cargarAlFinalArchivo()
+{
 
     FILE *archivo;
     archivo = fopen("miArchivo.bin", "ab");
@@ -53,26 +59,30 @@ void cargarAlFinalArchivo(){
     }
 }
 
-void mostrarArchivo(){
+void mostrarArchivo()
+{
 
     FILE *archivo;
     archivo = fopen("miArchivo.bin", "rb");
     stAlumno persona;
 
-    if(archivo != NULL){
+    if(archivo != NULL)
+    {
 
-       while(!feof(archivo)){
+        while(!feof(archivo))
+        {
 
             fread(&persona, sizeof(stAlumno),1, archivo);
 
-            if(!feof(archivo)){
-                printf("LEGAJO: %d", persona.legajo);
-                printf("\nNOMBRE: %s", persona.nombreYapellido);
-                printf("\nEDAD: %d", persona.edad);
-                printf("\nANIO: %d", persona.anio);
+            if(!feof(archivo))
+            {
+                printf("Legajo: %d", persona.legajo);
+                printf("\nNombre: %s", persona.nombreYapellido);
+                printf("\nEdad: %d", persona.edad);
+                printf("\nAnio: %d\n", persona.anio);
             }
-       }
-       fclose(archivo);
+        }
+        fclose(archivo);
     }
 }
 
@@ -92,4 +102,70 @@ int cantidadDeAlumnos()
     }
 
     return cant;
+}
+
+void cargarAlumnos5()
+{
+
+    FILE *archivo;
+    archivo = fopen("miArchivo.bin", "rb");
+
+    if (archivo != NULL)
+    {
+
+        printf("\nEl archivo ya estaba creado previamente");
+
+        int i = 0;
+
+        while(i < 5)
+        {
+
+            cargarAlFinalArchivo();
+            i++;
+        }
+        fclose(archivo);
+    }
+    else
+    {
+
+        printf("\nEl archivo es inexistente");
+        archivo = fopen("miArchivo.bin", "wb");
+    }
+}
+
+void mostrarArchivoMod()
+{
+
+    FILE *archivo;
+    archivo = fopen("miArchivo.bin", "rb");
+
+    if(archivo != NULL){
+
+    stAlumno persona;
+
+        while(!feof(archivo))
+        {
+
+            fread(&persona, sizeof(stAlumno),1, archivo);
+
+            if(!feof(archivo))
+            {
+                
+                modMostrar();
+                
+            }
+        }
+        fclose(archivo);
+
+    }
+
+}
+
+void modMostrar()
+{
+
+        printf("Legajo: %d", persona.legajo);
+                printf("\nNombre: %s", persona.nombreYapellido);
+                printf("\nEdad: %d", persona.edad);
+                printf("\nAnio: %d\n", persona.anio);
 }
