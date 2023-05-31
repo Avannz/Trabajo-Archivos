@@ -158,7 +158,7 @@ void cargarAlumnos5()
 {
 
     FILE *archivo;
-    archivo = fopen("miArchivo.bin", "wb");
+    archivo = fopen("miArchivo.bin", "ab"); //cambie esto
 
     if (archivo != NULL)
     {
