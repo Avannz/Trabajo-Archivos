@@ -18,20 +18,32 @@ void mostrarArchivoMod();
 void modMostrar(stAlumno persona);
 void cargarUnaVez();
 int edadEspecifica(stAlumno persona);
+void mostrarRangoEdad(stAlumno persona);
+void rangoEdad(stAlumno persona, int min, int max);
+void mayorEdad(stAlumno persona);
+void encontrarMayor (stAlumno persona);
+int anioEspecifica(stAlumno persona, int anio);
+void pasarArregloAlumnos(stAlumno alumnos[],int dim , stAlumno persona);
 
 int main()
 {
     Pila pila1;
     inicpila(&pila1);
     stAlumno persona;
+    stAlumno alumnos[30];
     int cantAlumnos = 0;
     int cantMayores = 0;
+    int anioCant = 0;
+    int min;
+    int max;
+    int anio;
+    int dim = 30;
 
 
     printf("*** TRABAJO PRACTICO ARCHIVOS ***");
 
 
-    printf("\n\n *PUNTO 1: \n");
+    /*printf("\n\n *PUNTO 1: \n");
     cargarAlFinalArchivo();
 
     printf("\n\n");
@@ -50,14 +62,14 @@ int main()
     printf("\n *PUNTO 4: \n");
     cargarAlumnos5();
 
-    printf("\n\n");
+    printf("\n\n");*/
 
     printf(" *PUNTO 5: \n");
     mostrarArchivoMod();
 
     printf("\n\n");
 
-    printf(" *PUNTO 6: \n");
+    /*printf(" *PUNTO 6: \n");
     cargarUnaVez();
 
     printf("\n\n");
@@ -75,6 +87,28 @@ int main()
     printf("\n\n");
 
     printf(" *PUNTO 9: \n");
+    mostrarRangoEdad(persona);
+
+    printf("\n\n");
+
+     printf(" *PUNTO 10: \n");
+     mayorEdad(persona);*/
+
+    printf(" *PUNTO 11: \n");
+
+    printf("Ingresa el año de la cursada: ");
+    fflush(stdin);
+    scanf("%d", &anio);
+
+    anioCant = anioEspecifica(persona, anio);
+    printf("La cantidad de alumnos en ese año es: %d", anioCant);
+
+    printf(" *PUNTO 12: \n");
+    pasarArregloAlumnos(alumnos, dim, persona);
+
+
+
+
 }
 
 void cargarAlFinalArchivo()
@@ -158,7 +192,7 @@ void cargarAlumnos5()
 {
 
     FILE *archivo;
-    archivo = fopen("miArchivo.bin", "ab"); //cambie esto
+    archivo = fopen("miArchivo.bin", "ab");
 
     if (archivo != NULL)
     {
@@ -235,7 +269,7 @@ void cargarUnaVez()
 
             cargarAlFinalArchivo();
 
-            printf("Presione 's' para ingresar otro usuario: ");
+            printf("Presione 's' para ingresar otro usuario");
             fflush(stdin);
             scanf("%c", &letra);
         }
@@ -283,13 +317,16 @@ int edadEspecifica(stAlumno persona)
     fflush(stdin);
     scanf("%d", &edad);
 
-    if(archivo != NULL){
+    if(archivo != NULL)
+    {
 
-        while(!feof(archivo)){
+        while(!feof(archivo))
+        {
 
-            fread(&persona, sizeof(stAlumno),1 , archivo);
+            fread(&persona, sizeof(stAlumno),1, archivo);
 
-            if(persona.edad > edad){
+            if(persona.edad > edad)
+            {
 
                 cant = cant + 1;
 
@@ -301,3 +338,154 @@ int edadEspecifica(stAlumno persona)
 
     return cant;
 }
+
+void mostrarRangoEdad(stAlumno persona)
+{
+
+    FILE *archivo;
+
+    archivo = fopen("miArchivo.bin", "rb");
+
+
+    if(archivo != NULL)
+    {
+
+        int min,max;
+
+        printf("Ingresa el minimo de edad: ");
+        fflush(stdin);
+        scanf("%i", &min);
+
+        printf("Ingresa el maximo de edad: ");
+        fflush(stdin);
+        scanf("%i", &max);
+
+
+        while(!feof(archivo))
+        {
+
+            fread(&persona, sizeof(stAlumno),1, archivo);
+            rangoEdad(persona,min,max);
+
+        }
+
+        fclose(archivo);
+    }
+}
+
+void rangoEdad(stAlumno persona,int min, int max)
+{
+    FILE *archivo;
+    archivo = fopen("miArchivo.bin", "rb");
+
+    if(archivo != NULL)
+    {
+
+        if (persona.edad >= min && persona.edad <= max)
+        {
+
+            modMostrar(persona);
+
+        }
+    }
+}
+
+void mayorEdad(stAlumno persona)
+{
+
+    FILE *archivo;
+
+    archivo = fopen("miArchivo.bin", "rb");
+    stAlumno edadMayor;
+    if(archivo != NULL)
+    {
+
+        encontrarMayor(persona);
+
+    }
+}
+
+
+void encontrarMayor (stAlumno persona)
+{
+
+    FILE *archivo;
+    archivo = fopen("miArchivo.bin", "rb");
+
+    stAlumno mayor;
+
+    if(archivo != NULL)
+    {
+
+        fread(&mayor, sizeof(stAlumno), 1, archivo);
+
+        while(!feof(archivo))
+        {
+
+            fread(&persona, sizeof(stAlumno), 1, archivo);
+
+            if(mayor.edad < persona.edad)
+            {
+
+                mayor = persona;
+
+            }
+        }
+        printf("El alumno con mas edad es: \n");
+        modMostrar(mayor);
+    }
+}
+
+int anioEspecifica(stAlumno persona, int anio)
+{
+
+    FILE *archivo;
+
+    archivo = fopen("miArchivo.bin", "rb");
+
+    int cant = 0;
+
+    if(archivo != NULL)
+    {
+
+        while(!feof(archivo))
+        {
+
+            fread(&persona, sizeof(stAlumno),1, archivo);
+
+            if(persona.anio == anio)
+            {
+
+                cant = cant + 1;
+
+            }
+        }
+
+        fclose(archivo);
+    }
+
+    return cant;
+}
+
+void pasarArregloAlumnos(stAlumno alumnos[],int dim , stAlumno persona)
+{
+
+    FILE *archivo;
+    archivo = fopen("miArchivo.bin", "rb");
+
+    int i = 0;
+
+    if(archivo != NULL)
+    {
+
+        while(!feof(archivo))
+        {
+
+            alumnos[i] = fread(&persona, sizeof(stAlumno),1, archivo);
+
+            i++;
+        }
+        fclose(archivo);
+    }
+}
+
