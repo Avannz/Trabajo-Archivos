@@ -31,6 +31,7 @@ void mostrarArreglo(stAlumno arreglo[], int validos);
 void catorce (stAlumno persona, int numero);
 void modificarAlumno(int numRegistro);
 stAlumno alterarAlumno(stAlumno persona);
+void cambiarOrden(stAlumno persona);
 
 int main()
 {
@@ -47,88 +48,175 @@ int main()
     int dim = 30;
     int validos;
     int numero;
+    int opc;
 
+    printf(" \n        *** TRABAJO PRACTICO ARCHIVOS ***");
 
-    printf("*** TRABAJO PRACTICO ARCHIVOS ***");
+    printf("\n===================================================");
+    printf("=                                               =\n");
+    printf("=  1) PUNTO 1                         2) PUNTO 2    =\n");
+    printf("=                                                   =\n");
+    printf("=  3) PUNTO 3                         4) PUNTO 4    =\n");
+    printf("=                                                   =\n");
+    printf("=  5) PUNTO 5                         6) PUNTO 6    =\n");
+    printf("=                                                   =\n");
+    printf("=  7) PUNTO 7                         8) PUNTO 8    =\n");
+    printf("=                                                   =\n");
+    printf("=  9) PUNTO 9                         10) PUNTO 10  =\n");
+    printf("=                                                   =\n");
+    printf("=  11) PUNTO 11                       12) PUNTO 12  =\n");
+    printf("=                                                   =\n");
+    printf("=  13) PUNTO 13                       14) PUNTO 14  =\n");
+    printf("=                                                   =\n");
+    printf("=  15) PUNTO 15                       16) PUNTO 16  =\n");
+    printf("=                                                   =\n");
+    printf("====================================================");
 
-
-    /* printf("\n\n *PUNTO 1: \n");
-     cargarAlFinalArchivo();
-
-     printf("\n\n");
-
-     printf(" *PUNTO 2: \n");
-     mostrarArchivo();
-
-     printf("\n\n");
-
-     printf(" *PUNTO 3: \n");
-     cantAlumnos = cantidadDeAlumnos();
-     printf("\n- La cantidad de alumnos registrados es de: %d ", cantAlumnos);
-
-     printf("\n\n");
-
-     printf("\n *PUNTO 4: \n");
-     cargarAlumnos5();
-
-     printf("\n\n");
-
-     printf(" *PUNTO 5: \n");
-     mostrarArchivoMod();
-
-     printf("\n\n");
-
-     printf(" *PUNTO 6: \n");
-     cargarUnaVez();
-
-     printf("\n\n");
-
-     printf(" *PUNTO 7: \n");
-     cargarPilaMayores(&pila1, persona);
-     mostrar(&pila1);
-
-     printf("\n\n");
-
-     printf(" *PUNTO 8: \n");
-     cantMayores = edadEspecifica(persona);
-     printf("La cantidad de alumnos mayores a la edad ingresada es de: %d", cantMayores);
-
-     printf("\n\n");
-
-     printf(" *PUNTO 9: \n");
-     mostrarRangoEdad(persona);
-
-     printf("\n\n");
-
-      printf(" *PUNTO 10: \n");
-      mayorEdad(persona);
-
-     printf(" *PUNTO 11: \n");
-
-     printf("Ingresa el año de la cursada: ");
-     fflush(stdin);
-     scanf("%d", &anio);
-
-     anioCant = anioEspecifica(persona, anio);
-     printf("La cantidad de alumnos en ese año es: %d", anioCant);
-
-    printf(" *PUNTO 12: \n");
-    validos = pasarArregloAlumnos(alumnos, dim, persona);
-    mostrarArreglo(alumnos, validos);
-
-    printf("\nPUNTO 14: \n");
-
-    printf("Ingresa un numero entre el 0 y 9: ");
+    printf("Ingresa el ejercicio");
     fflush(stdin);
-    scanf("%i", &numero);
+    scanf("%i", &opc);
 
-    catorce(persona, numero);*/
+    switch(opc)
+    {
 
-    printf("PUNTO 15: \n");
-    
-    modificarAlumno(2);
-    mostrarArchivo();
+    case 1:
 
+        printf("\n\n *PUNTO 1: \n");
+        cargarAlFinalArchivo();
+
+        break;
+
+
+    case 2:
+        printf(" *PUNTO 2: \n");
+        mostrarArchivo();
+
+        break;
+
+
+    case 3:
+
+        printf(" *PUNTO 3: \n");
+        cantAlumnos = cantidadDeAlumnos();
+        printf("\n- La cantidad de alumnos registrados es de: %d ", cantAlumnos);
+        break;
+
+
+    case 4:
+
+        printf("\n *PUNTO 4: \n");
+        cargarAlumnos5();
+        break;
+
+
+    case 5:
+
+
+        printf(" *PUNTO 5: \n");
+        mostrarArchivoMod();
+        break;
+
+
+    case 6:
+
+        printf(" *PUNTO 6: \n");
+        cargarUnaVez();
+        break;
+
+
+    case 7:
+
+        printf(" *PUNTO 7: \n");
+        cargarPilaMayores(&pila1, persona);
+        mostrar(&pila1);
+        break;
+
+
+    case 8:
+
+
+        printf(" *PUNTO 8: \n");
+        cantMayores = edadEspecifica(persona);
+        printf("La cantidad de alumnos mayores a la edad ingresada es de: %d", cantMayores);
+
+        break;
+
+
+    case 9:
+
+        printf(" *PUNTO 9: \n");
+        mostrarRangoEdad(persona);
+        break;
+
+
+    case 10:
+
+        printf(" *PUNTO 10: \n");
+        mayorEdad(persona);
+
+        break;
+
+
+    case 11:
+        printf(" *PUNTO 11: \n");
+
+        printf("Ingresa el año de la cursada: ");
+        fflush(stdin);
+        scanf("%d", &anio);
+
+        anioCant = anioEspecifica(persona, anio);
+        printf("La cantidad de alumnos en ese año es: %d", anioCant);
+
+        break;
+
+
+    case 12:
+
+
+        printf(" *PUNTO 12: \n");
+        validos = pasarArregloAlumnos(alumnos, dim, persona);
+        mostrarArreglo(alumnos, validos);
+
+        break;
+
+
+    case 13:
+
+        break;
+
+
+    case 14:
+
+        printf("\nPUNTO 14: \n");
+
+        printf("Ingresa un numero entre el 0 y 9: ");
+        fflush(stdin);
+        scanf("%i", &numero);
+
+        catorce(persona, numero);
+        break;
+
+
+    case 15:
+
+        printf("PUNTO 15: \n");
+
+        modificarAlumno(2);
+        mostrarArchivo();
+        break;
+
+
+    case 16:
+
+        printf("PUNTO 16: \n");
+        cambiarOrden(persona);
+        mostrarArchivo();
+
+
+        break;
+
+
+    }
 
 }
 
@@ -559,10 +647,7 @@ void catorce (stAlumno persona, int numero)
                         printf("===================");
 
                     }
-
-
                 }
-
             }
         }
         else
@@ -576,7 +661,8 @@ void catorce (stAlumno persona, int numero)
     }
 }
 
-void modificarAlumno(int numRegistro){
+void modificarAlumno(int numRegistro)
+{
 
     FILE *archivo;
     archivo = fopen("miArchivo.bin", "r+b");
@@ -586,19 +672,19 @@ void modificarAlumno(int numRegistro){
     {
         fseek(archivo,sizeof(stAlumno) * (numRegistro-1),SEEK_SET);
         fread(&persona,sizeof(stAlumno),1,archivo);
-        printf("persona1 antes===================");
-                        printf("\nLegajo: %d", persona.legajo);
-                        printf("\nNombre: %s", persona.nombreYapellido);
-                        printf("\nEdad: %d", persona.edad);
-                        printf("\nAnio: %d\n", persona.anio);
-                        printf("===================");
+        printf("persona1 antes");
+        printf("\nLegajo: %d", persona.legajo);
+        printf("\nNombre: %s", persona.nombreYapellido);
+        printf("\nEdad: %d", persona.edad);
+        printf("\nAnio: %d\n", persona.anio);
+        printf("===================");
         persona = alterarAlumno(persona);
-        printf("persona1===================");
-                        printf("\nLegajo: %d", persona.legajo);
-                        printf("\nNombre: %s", persona.nombreYapellido);
-                        printf("\nEdad: %d", persona.edad);
-                        printf("\nAnio: %d\n", persona.anio);
-                        printf("===================");
+        printf("persona");
+        printf("\nLegajo: %d", persona.legajo);
+        printf("\nNombre: %s", persona.nombreYapellido);
+        printf("\nEdad: %d", persona.edad);
+        printf("\nAnio: %d\n", persona.anio);
+        printf("===================");
         fseek(archivo,sizeof(stAlumno) * -1, SEEK_CUR);
         fwrite(&persona,sizeof(stAlumno),1,archivo);
 
@@ -606,7 +692,8 @@ void modificarAlumno(int numRegistro){
     }
 }
 
-stAlumno alterarAlumno(stAlumno persona){
+stAlumno alterarAlumno(stAlumno persona)
+{
 
     int opc;
     stAlumno cambiar;
@@ -678,3 +765,40 @@ stAlumno alterarAlumno(stAlumno persona){
     return persona;
 }
 
+void cambiarOrden(stAlumno persona)
+{
+
+    FILE *archivo;
+    archivo = fopen("miArchivo.bin", "r+b");
+
+    stAlumno aux;
+    stAlumno aux2;
+    int i = cantidadDeAlumnos() - 1;
+    int j = 0;
+    if(archivo != NULL)
+    {
+
+        while(i > j)
+        {
+            fseek(archivo, i*sizeof(stAlumno), SEEK_SET);
+
+            fread(&persona, sizeof(stAlumno), 1, archivo);
+            aux = persona;
+
+            fseek(archivo, j*sizeof(stAlumno), SEEK_SET);
+
+            fread(&persona, sizeof(stAlumno), 1, archivo);
+            aux2 = persona;
+
+            fseek(archivo, i*sizeof(stAlumno), SEEK_SET);
+            fwrite(&aux2, sizeof(stAlumno), 1, archivo);
+
+            fseek(archivo, j*sizeof(stAlumno), SEEK_SET);
+            fwrite(&aux, sizeof(stAlumno), 1, archivo);
+
+            i--;
+            j++;
+        }
+        fclose(archivo);
+    }
+}
